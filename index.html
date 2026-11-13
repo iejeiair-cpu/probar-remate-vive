@@ -7,99 +7,85 @@
 <meta name="description" content="Sumate a la prueba cerrada de Remate Vive para Android en 3 pasos.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#003e2b">
-<!-- Página estática de bienvenida para verificadores de la prueba cerrada (Google Play).
-     Sin formularios, sin cookies, sin analítica y sin datos personales. El progreso que marca la persona
-     se guarda solo en su propio navegador (localStorage) y es una autoconfirmación: Google no informa
-     a esta página si una acción se completó. -->
+<!-- Asistente guiado para verificadores de la prueba cerrada (Google Play). Un paso por pantalla.
+     Sin formularios, cookies ni analítica. El avance se guarda solo en el navegador de la persona (localStorage).
+     Cada confirmación es del usuario: Google no informa a esta página si una acción se completó. -->
 <style>
-:root{--verde:#003e2b;--verde2:#005536;--lima:#c9f24a;--texto:#172034;--gris:#64718a;--fondo:#f4f7f5;--borde:#e5ebe8;--ok:#1d7a46}
+:root{--verde:#003e2b;--verde2:#005536;--lima:#c9f24a;--texto:#172034;--gris:#64718a;--fondo:#f4f7f5}
 *{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.45;-webkit-text-size-adjust:100%}
-header{background:var(--verde);color:#fff;padding:28px 20px 34px;text-align:center}
-.logo{width:72px;height:72px;border-radius:18px;background:var(--verde2);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px var(--lima)}
-h1{font-size:1.55rem;margin:14px 0 6px;letter-spacing:-.01em}
-header p{margin:0 auto;max-width:30rem;opacity:.9}
-main{max-width:34rem;margin:-18px auto 0;padding:0 16px 32px}
-.aviso{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:14px 16px;font-size:.95rem}
-.aviso b{color:var(--verde)}
-ol{list-style:none;margin:16px 0 0;padding:0;counter-reset:paso}
-li.paso{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:16px;margin-bottom:12px;counter-increment:paso;position:relative}
-li.paso.hecho{border-color:var(--ok)}
-.cab{display:flex;gap:12px;align-items:center}
-.num{flex:0 0 36px;height:36px;border-radius:50%;background:var(--verde);color:var(--lima);font-weight:700;display:flex;align-items:center;justify-content:center}
-.hecho .num{background:var(--ok);color:#fff}
-h2{font-size:1.1rem;margin:0}
-.paso p{margin:8px 0 12px;color:var(--gris);font-size:.95rem}
-a.boton{display:block;text-align:center;text-decoration:none;background:var(--verde);color:#fff;font-weight:700;padding:14px 16px;border-radius:12px;font-size:1.05rem}
-a.boton:active{background:var(--verde2)}
-.siguiente a.boton{box-shadow:0 0 0 3px var(--lima)}
-label.marca{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:.92rem;color:var(--texto)}
-label.marca input{width:22px;height:22px;accent-color:var(--ok)}
-.importante{background:#fffbea;border:1px solid #f0dc8a;border-radius:14px;padding:14px 16px;font-size:.93rem;margin-top:4px}
-.importante h3{margin:0 0 6px;font-size:1rem}
-.importante ul{margin:6px 0 0;padding-left:18px}
-footer{text-align:center;color:var(--gris);font-size:.82rem;padding:8px 16px 28px}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fondo);color:var(--texto);display:flex;flex-direction:column;min-height:100%;-webkit-text-size-adjust:100%}
+header{background:var(--verde);color:#fff;padding:18px 20px;display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--verde2);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--lima);flex:0 0 auto}
+header b{font-size:1.1rem}
+main{flex:1;display:flex;flex-direction:column;max-width:30rem;width:100%;margin:0 auto;padding:28px 20px 24px}
+.indicador{color:var(--gris);font-size:.9rem;margin:0 0 10px}
+h1{font-size:1.7rem;line-height:1.2;margin:0 0 12px}
+p{font-size:1.05rem;line-height:1.5;margin:0 0 12px;color:#3a4558}
+.acciones{margin-top:auto;padding-top:24px}
+.boton{display:block;width:100%;text-align:center;text-decoration:none;border:0;cursor:pointer;background:var(--verde);color:#fff;font:inherit;font-weight:800;letter-spacing:.02em;font-size:1.1rem;padding:18px 16px;border-radius:14px;box-shadow:0 0 0 3px var(--lima)}
+.boton:active{background:var(--verde2)}
+.secundario{display:block;width:100%;background:none;border:0;font:inherit;color:var(--verde2);text-decoration:underline;padding:14px 8px;margin-top:6px;cursor:pointer;font-size:.98rem}
+.atras{background:none;border:0;font:inherit;color:var(--gris);padding:4px 0;margin:0 0 14px;cursor:pointer;font-size:.95rem;align-self:flex-start}
+.final{text-align:center}
+.final .sello{width:84px;height:84px;border-radius:50%;background:var(--verde);color:var(--lima);font-size:44px;display:flex;align-items:center;justify-content:center;margin:12px auto 18px}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
 <header>
   <div class="logo" aria-hidden="true">
-    <svg width="44" height="44" viewBox="0 0 64 64" fill="#c9f24a"><g transform="rotate(-38 26 22)"><rect x="12" y="13" width="28" height="17" rx="3"/><rect x="9" y="11" width="5" height="21" rx="2"/><rect x="38" y="11" width="5" height="21" rx="2"/></g><rect x="31" y="22" width="6" height="30" rx="3" transform="rotate(-38 34 37)"/><rect x="21" y="45" width="20" height="4" rx="2"/><rect x="17" y="50" width="28" height="5" rx="2.5"/></svg>
+    <svg width="28" height="28" viewBox="0 0 64 64" fill="#c9f24a"><g transform="rotate(-38 26 22)"><rect x="12" y="13" width="28" height="17" rx="3"/><rect x="9" y="11" width="5" height="21" rx="2"/><rect x="38" y="11" width="5" height="21" rx="2"/></g><rect x="31" y="22" width="6" height="30" rx="3" transform="rotate(-38 34 37)"/><rect x="21" y="45" width="20" height="4" rx="2"/><rect x="17" y="50" width="28" height="5" rx="2.5"/></svg>
   </div>
-  <h1>Probá Remate Vive</h1>
-  <p>Gracias por sumarte a la prueba de nuestra app de subastas de autos para Android. Son 3 pasos y te llevan 2 minutos.</p>
+  <b>Remate Vive · Prueba en Android</b>
 </header>
-<main>
-  <div class="aviso">Usá <b>la misma cuenta de Google</b> que tenés en el Play Store de tu celular en los 3 pasos. Hacelo desde tu <b>Android</b> (no sirve iPhone). Cada botón abre una pestaña nueva: cuando termines, volvé a esta pestaña para seguir.</div>
-  <ol>
-    <li class="paso" id="p1">
-      <div class="cab"><span class="num">1</span><h2>Unite al grupo de prueba</h2></div>
-      <p>Se abre Grupos de Google. Tocá <b>«Unirse al grupo»</b> (si te pide iniciar sesión, usá tu cuenta de Google).</p>
-      <a class="boton" href="https://groups.google.com/g/remate-tester" target="_blank" rel="noopener" data-paso="1">Unirme al grupo</a>
-      <label class="marca"><input type="checkbox" data-marca="1"> Ya me uní al grupo</label>
-    </li>
-    <li class="paso" id="p2">
-      <div class="cab"><span class="num">2</span><h2>Aceptá la prueba en Google Play</h2></div>
-      <p>Tocá <b>«Convertirse en verificador»</b> («Become a tester»). Tiene que aparecer «Eres un verificador». <b>Este paso es el que cuenta para Google.</b> Si dice que no está disponible, esperá un minuto después del paso 1 y volvé a abrirlo.</p>
-      <a class="boton" href="https://play.google.com/apps/testing/ar.rematevive.app" target="_blank" rel="noopener" data-paso="2">Aceptar la prueba</a>
-      <label class="marca"><input type="checkbox" data-marca="2"> Ya soy verificador</label>
-    </li>
-    <li class="paso" id="p3">
-      <div class="cab"><span class="num">3</span><h2>Instalá la app</h2></div>
-      <p>Se abre Google Play. Tocá <b>«Instalar»</b> y abrí Remate Vive.</p>
-      <a class="boton" href="https://play.google.com/store/apps/details?id=ar.rematevive.app" target="_blank" rel="noopener" data-paso="3">Instalar Remate Vive</a>
-      <label class="marca"><input type="checkbox" data-marca="3"> Ya la instalé</label>
-    </li>
-  </ol>
-  <div class="importante">
-    <h3>Importante: 14 días</h3>
-    <ul>
-      <li>Quedate inscripto y con la app instalada <b>al menos 14 días</b>. No toques «Abandonar el programa».</li>
-      <li>Abrila de vez en cuando y contanos qué te parece. Las actualizaciones llegan solas por Google Play.</li>
-      <li>Es una versión de prueba: no hay pagos reales.</li>
-    </ul>
-  </div>
-</main>
-<footer>Remate Vive · Prueba cerrada en Google Play. Esta página no guarda datos personales: las marcas de «ya lo hice» quedan solo en tu celular.</footer>
+<main id="pantalla" aria-live="polite"></main>
 <script>
-// Progreso local y opcional (autoconfirmación de la persona; Google no lo informa).
 (function(){
-  var K='rv-verificador-v1',estado={};
-  try{estado=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
-  function guardar(){try{localStorage.setItem(K,JSON.stringify(estado))}catch(e){}}
+  // Pasos con sus enlaces oficiales (Grupos de Google y Google Play).
+  var PASOS=[
+    {titulo:'Unite al grupo de prueba',texto:'Se abre Grupos de Google. Tocá «Unirse al grupo» con la misma cuenta de Google que usás en el Play Store de tu celular.',
+     boton:'UNIRME AL GRUPO',url:'https://groups.google.com/g/remate-tester',pregunta:'¿Ya te uniste al grupo?'},
+    {titulo:'Aceptá la prueba en Google Play',texto:'Tocá «Convertirse en verificador». Si dice que no está disponible, esperá un minuto y volvé a intentarlo.',
+     boton:'ACEPTAR PRUEBA',url:'https://play.google.com/apps/testing/ar.rematevive.app',pregunta:'¿Google confirmó que sos verificador?'},
+    {titulo:'Instalá Remate Vive',texto:'Se abre Google Play. Tocá «Instalar».',
+     boton:'INSTALAR DESDE GOOGLE PLAY',url:'https://play.google.com/store/apps/details?id=ar.rematevive.app',pregunta:'¿Terminaste de instalarla?'}
+  ];
+  var K='rv-asistente-v2',e={paso:0,volvio:false};   // paso 0..2, 3 = final; volvio = ya abrió el enlace del paso
+  try{var g=JSON.parse(localStorage.getItem(K)||'null');if(g&&typeof g.paso==='number')e=g}catch(x){}
+  function guardar(){try{localStorage.setItem(K,JSON.stringify(e))}catch(x){}}
+  var M=document.getElementById('pantalla');
+  function el(tag,attrs,txt){var n=document.createElement(tag);for(var k in attrs)n.setAttribute(k,attrs[k]);if(txt)n.textContent=txt;return n}
   function pintar(){
-    var sig=null;
-    [1,2,3].forEach(function(n){
-      var li=document.getElementById('p'+n),c=li.querySelector('[data-marca]');
-      c.checked=!!estado[n];li.classList.toggle('hecho',!!estado[n]);li.classList.remove('siguiente');
-      if(!estado[n]&&sig===null)sig=n;
-    });
-    if(sig)document.getElementById('p'+sig).classList.add('siguiente');
+    M.innerHTML='';
+    if(e.paso>=PASOS.length){
+      var f=el('div',{'class':'final'});f.appendChild(el('div',{'class':'sello','aria-hidden':'true'},'✓'));
+      f.appendChild(el('h1',{},'¡Gracias por participar!'));
+      f.appendChild(el('p',{},'Mantenete inscrito durante 14 días y dejá la app instalada. Las actualizaciones llegan solas por Google Play.'));
+      M.appendChild(f);
+      var a=el('div',{'class':'acciones'}),b=el('button',{'class':'atras',type:'button'},'← Volver al paso anterior');
+      b.onclick=function(){e={paso:PASOS.length-1,volvio:true};guardar();pintar()};a.appendChild(b);M.appendChild(a);return;
+    }
+    var p=PASOS[e.paso];
+    if(e.paso>0||e.volvio){var at=el('button',{'class':'atras',type:'button'},'← Paso anterior');
+      at.onclick=function(){if(e.volvio)e.volvio=false;else e={paso:e.paso-1,volvio:false};guardar();pintar()};M.appendChild(at)}
+    M.appendChild(el('p',{'class':'indicador'},'Paso '+(e.paso+1)+' de '+PASOS.length));
+    var acc=el('div',{'class':'acciones'});
+    if(!e.volvio){
+      M.appendChild(el('h1',{},p.titulo));M.appendChild(el('p',{},p.texto));
+      var ir=el('a',{'class':'boton',href:p.url,target:'_blank',rel:'noopener'},p.boton);
+      ir.onclick=function(){e.volvio=true;guardar();setTimeout(pintar,300)};   // al volver a esta pestaña ya se ve la confirmación
+      acc.appendChild(ir);
+    }else{
+      M.appendChild(el('h1',{},p.pregunta));
+      M.appendChild(el('p',{},'Si no se pudo, abrilo de nuevo.'));
+      var si=el('button',{'class':'boton',type:'button'},e.paso===PASOS.length-1?'FINALIZAR':'SÍ, CONTINUAR');
+      si.onclick=function(){e={paso:e.paso+1,volvio:false};guardar();pintar();window.scrollTo(0,0)};
+      var otra=el('a',{'class':'secundario',href:p.url,target:'_blank',rel:'noopener'},'Abrir de nuevo');
+      acc.appendChild(si);acc.appendChild(otra);
+    }
+    M.appendChild(acc);
   }
-  document.querySelectorAll('[data-marca]').forEach(function(c){
-    c.addEventListener('change',function(){estado[c.getAttribute('data-marca')]=c.checked;guardar();pintar()});
-  });
   pintar();
 })();
 </script>
