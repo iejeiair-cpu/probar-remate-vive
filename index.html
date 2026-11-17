@@ -4,40 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Probá Rema Top</title>
-<meta name="description" content="Probá Rema Top en Android.">
+<meta name="description" content="Probá Rema Top en Android: unite al grupo, aceptá la prueba e instalá la app.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#013d24">
 <link rel="icon" href="rematop-logo.png">
-<!-- Inscripción de Rema Top con la lista de correo privada «Rema Top - verificadores» de Play Console (sin Google Groups).
-     Una pantalla, un botón. En Android abre el enlace oficial «Unirse en Android» de Play Console (la ficha de la app
-     en Play Store, donde una cuenta de la lista acepta la prueba e instala). En otros equipos abre «Unirse desde la Web».
-     Sin formularios, cookies, analítica ni direcciones de correo. -->
+<!-- Inscripción abierta de Rema Top (prueba cerrada «Alpha» de Google Play, ar.rematevive.app, administrada por el
+     Grupo de Google remate-tester, al que cualquier persona puede unirse sin aprobación). Una pantalla, un botón.
+     COMENZAR pasa por el acceso de Google y llega al grupo (sin sesión, Google Groups no muestra «Unirse»). En el grupo,
+     la conversación fijada «SIGUIENTE PASO: ACTIVAR REMA TOP» lleva a la aceptación oficial de Google Play, y esa
+     página ofrece «descárgala en Google Play». Nadie necesita volver a esta página. Sin formularios, cookies ni analítica. -->
 <style>
 :root{--verde:#013d24;--menta:#05fbbc}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(120% 70% at 50% 0%,#0b5a38 0%,var(--verde) 55%,#00261a 100%);color:#fff;-webkit-text-size-adjust:100%}
-main{min-height:100%;max-width:30rem;margin:0 auto;padding:56px 26px 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.logo{width:150px;height:150px;border-radius:50%;box-shadow:0 0 0 6px rgba(5,251,188,.18),0 18px 40px rgba(0,0,0,.35);margin-bottom:34px}
-h1{font-size:2.3rem;line-height:1.12;margin:0 0 14px;font-weight:800}
-p{font-size:1.15rem;line-height:1.45;margin:0;color:#cfe9dd}
+html,body{margin:0;min-height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(120% 70% at 50% 0%,#0b5a38 0%,var(--verde) 55%,#00261a 100%);background-attachment:fixed;color:#fff;-webkit-text-size-adjust:100%}
+main{min-height:100vh;max-width:30rem;margin:0 auto;padding:40px 24px 32px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.logo{width:116px;height:116px;border-radius:50%;box-shadow:0 0 0 6px rgba(5,251,188,.18),0 18px 40px rgba(0,0,0,.35);margin-bottom:22px}
+h1{font-size:2.1rem;line-height:1.12;margin:0 0 22px;font-weight:800}
+ol{list-style:none;padding:0;margin:0 0 26px;text-align:left;width:100%}
+li{display:flex;gap:14px;align-items:flex-start;font-size:1.13rem;line-height:1.4;margin:0 0 15px;color:#e3f4ec}
+li b{color:#fff}
+.n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--menta);color:var(--verde);font-weight:900;display:flex;align-items:center;justify-content:center}
 .boton{display:block;width:100%;margin-top:auto;text-decoration:none;background:var(--menta);color:var(--verde);font-weight:900;font-size:1.45rem;letter-spacing:.06em;padding:22px 16px;border-radius:18px;box-shadow:0 12px 28px rgba(5,251,188,.28)}
 .boton:active{transform:scale(.98)}
-.espacio{flex:1;min-height:40px}
+.nota{font-size:.95rem;color:#a9cfbf;margin:16px 0 0;line-height:1.45}
 </style>
 </head>
 <body>
 <main>
-  <img class="logo" src="rematop-logo.png" alt="Rema Top" width="150" height="150">
-  <h1>¡Ya podés probar Rema Top!</h1>
-  <p>Aceptá la prueba e instalá la app desde Google Play.</p>
-  <div class="espacio"></div>
-  <a class="boton" id="comenzar" href="https://play.google.com/apps/testing/ar.rematevive.app">COMENZAR</a>
+  <img class="logo" src="rematop-logo.png" alt="Rema Top" width="116" height="116">
+  <h1>¡Probá Rema Top!</h1>
+  <ol>
+    <li><span class="n">1</span><span>Tocá <b>«Unirse al grupo»</b>.</span></li>
+    <li><span class="n">2</span><span>Tocá <b>«SIGUIENTE PASO: ACTIVAR REMA TOP»</b> y su enlace.</span></li>
+    <li><span class="n">3</span><span>Tocá <b>«Convertirse en probador»</b>, después <b>«descárgala en Google Play»</b> e <b>Instalar</b>.</span></li>
+  </ol>
+  <a class="boton" href="https://accounts.google.com/ServiceLogin?hl=es-419&amp;passive=true&amp;continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fremate-tester">COMENZAR</a>
+  <p class="nota">Usá la misma cuenta de Google de tu Play Store. En Google Play la app figura como «remate vive».</p>
 </main>
-<script>
-// En Android: abre la ficha en la app Play Store (enlace oficial «Unirse en Android», misma cuenta del teléfono) con un
-// intent de Chrome; si Play Store no se puede abrir, Chrome sigue solo a «Unirse desde la Web». Resto de equipos: la web.
-if(/Android/i.test(navigator.userAgent))document.getElementById('comenzar').href='intent://details?id=ar.rematevive.app#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Far.rematevive.app;end';
-</script>
 </body>
 </html>
