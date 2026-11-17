@@ -35,8 +35,9 @@ p{font-size:1.15rem;line-height:1.45;margin:0;color:#cfe9dd}
   <a class="boton" id="comenzar" href="https://play.google.com/apps/testing/ar.rematevive.app">COMENZAR</a>
 </main>
 <script>
-// En Android: enlace oficial «Unirse en Android» (ficha en Play Store, misma cuenta del teléfono). Resto: «Unirse desde la Web».
-if(/Android/i.test(navigator.userAgent))document.getElementById('comenzar').href='https://play.google.com/store/apps/details?id=ar.rematevive.app';
+// En Android: abre la ficha en la app Play Store (enlace oficial «Unirse en Android», misma cuenta del teléfono) con un
+// intent de Chrome; si Play Store no se puede abrir, Chrome sigue solo a «Unirse desde la Web». Resto de equipos: la web.
+if(/Android/i.test(navigator.userAgent))document.getElementById('comenzar').href='intent://details?id=ar.rematevive.app#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Far.rematevive.app;end';
 </script>
 </body>
 </html>
