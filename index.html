@@ -2,45 +2,110 @@
 <html lang="es-AR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Probá Rema Top</title>
-<meta name="description" content="Probá Rema Top en Android: unite al grupo, aceptá la prueba e instalá la app.">
+<meta name="description" content="Probá Rema Top en Android en 3 pasos.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#013d24">
 <link rel="icon" href="rematop-logo.png">
-<!-- Inscripción abierta de Rema Top (prueba cerrada «Alpha» de Google Play, ar.rematevive.app, administrada por el
-     Grupo de Google remate-tester, al que cualquier persona puede unirse sin aprobación). Una pantalla, un botón.
-     COMENZAR pasa por el acceso de Google y llega al grupo (sin sesión, Google Groups no muestra «Unirse»). En el grupo,
-     la conversación fijada «SIGUIENTE PASO: ACTIVAR REMA TOP» lleva a la aceptación oficial de Google Play, y esa
-     página ofrece «descárgala en Google Play». Nadie necesita volver a esta página. Sin formularios, cookies ni analítica. -->
+<!--
+  Inscripción de verificadores de Rema Top (prueba cerrada «Alpha» de ar.rematevive.app, Grupo de Google remate-tester).
+  Basada en la primera versión (commit 1c73ef3): una sola página con las 3 acciones a la vista y cada botón abre la
+  acción oficial de Google en una pestaña nueva. Al terminar en Google, «Atrás» cierra esa pestaña y vuelve acá.
+  Sin conversaciones fijadas, sin confirmaciones propias, sin casillas «ya lo hice», sin servicios ni formularios.
+  Lo único que se recuerda (solo en este navegador) es qué botones ya se tocaron, para resaltar el paso siguiente;
+  nunca se afirma que un paso salió bien, porque Google no se lo informa a esta página.
+-->
 <style>
-:root{--verde:#013d24;--menta:#05fbbc}
+:root{--verde:#013d24;--verde2:#0b5a38;--menta:#05fbbc;--texto:#e6f6ee;--suave:#a9cfbf;--tarjeta:rgba(255,255,255,.06);--borde:rgba(5,251,188,.18)}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(120% 70% at 50% 0%,#0b5a38 0%,var(--verde) 55%,#00261a 100%);background-attachment:fixed;color:#fff;-webkit-text-size-adjust:100%}
-main{min-height:100vh;max-width:30rem;margin:0 auto;padding:40px 24px 32px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.logo{width:116px;height:116px;border-radius:50%;box-shadow:0 0 0 6px rgba(5,251,188,.18),0 18px 40px rgba(0,0,0,.35);margin-bottom:22px}
-h1{font-size:2.1rem;line-height:1.12;margin:0 0 22px;font-weight:800}
-ol{list-style:none;padding:0;margin:0 0 26px;text-align:left;width:100%}
-li{display:flex;gap:14px;align-items:flex-start;font-size:1.13rem;line-height:1.4;margin:0 0 15px;color:#e3f4ec}
-li b{color:#fff}
-.n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--menta);color:var(--verde);font-weight:900;display:flex;align-items:center;justify-content:center}
-.boton{display:block;width:100%;margin-top:auto;text-decoration:none;background:var(--menta);color:var(--verde);font-weight:900;font-size:1.45rem;letter-spacing:.06em;padding:22px 16px;border-radius:18px;box-shadow:0 12px 28px rgba(5,251,188,.28)}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#fff;-webkit-text-size-adjust:100%;
+  background:radial-gradient(120% 60% at 50% 0%,var(--verde2) 0%,var(--verde) 50%,#00261a 100%) fixed}
+main{max-width:30rem;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom));text-align:center}
+.logo{width:88px;height:88px;border-radius:50%;margin:2px 0 12px;box-shadow:0 0 0 6px rgba(5,251,188,.16),0 0 46px rgba(5,251,188,.2),0 18px 36px rgba(0,0,0,.4)}
+h1{font-size:1.85rem;line-height:1.1;margin:0 0 6px;font-weight:850;letter-spacing:-.01em}
+.bajada{font-size:.97rem;line-height:1.4;margin:0 auto 14px;color:var(--texto);max-width:24rem}
+.bajada b{color:#fff}
+ol{list-style:none;margin:0;padding:0;text-align:left}
+.paso{background:var(--tarjeta);border:1px solid var(--borde);border-radius:20px;padding:13px 14px;margin:0 0 11px;transition:border-color .2s,background .2s}
+.paso.siguiente{background:rgba(5,251,188,.09);border-color:var(--menta);box-shadow:0 0 0 1px var(--menta),0 14px 30px rgba(0,0,0,.25)}
+.cab{display:flex;gap:10px;align-items:center;margin-bottom:4px}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:rgba(5,251,188,.16);color:var(--menta);font-weight:900;display:flex;align-items:center;justify-content:center}
+.siguiente .num{background:var(--menta);color:var(--verde)}
+h2{font-size:1.12rem;margin:0;font-weight:800}
+.paso p{margin:0 0 10px;color:var(--suave);font-size:.92rem;line-height:1.35}
+.paso p b{color:#fff}
+.boton{display:block;text-align:center;text-decoration:none;font-weight:900;letter-spacing:.05em;font-size:1.08rem;padding:14px 12px;border-radius:14px;
+  background:rgba(5,251,188,.14);color:var(--menta);border:1px solid var(--borde)}
+.siguiente .boton{background:var(--menta);color:var(--verde);border-color:var(--menta);box-shadow:0 10px 24px rgba(5,251,188,.28)}
 .boton:active{transform:scale(.98)}
-.nota{font-size:.95rem;color:#a9cfbf;margin:16px 0 0;line-height:1.45}
+.abierto{display:none;margin:8px 0 0;font-size:.85rem;color:var(--suave);text-align:center}
+.paso.tocado .abierto{display:block}
+.nota{font-size:.88rem;color:var(--suave);line-height:1.45;margin:18px auto 0;max-width:26rem}
+.nota b{color:#fff}
 </style>
 </head>
 <body>
 <main>
-  <img class="logo" src="rematop-logo.png" alt="Rema Top" width="116" height="116">
+  <img class="logo" src="rematop-logo.png" alt="Rema Top" width="88" height="88">
   <h1>¡Probá Rema Top!</h1>
+  <p class="bajada">Usá <b>la misma cuenta de Google de tu Play Store</b>. Al terminar cada paso, tocá <b>Atrás</b> y seguí con el próximo.</p>
   <ol>
-    <li><span class="n">1</span><span>Tocá <b>«Unirse al grupo»</b>.</span></li>
-    <li><span class="n">2</span><span>Tocá <b>«SIGUIENTE PASO: ACTIVAR REMA TOP»</b> y su enlace.</span></li>
-    <li><span class="n">3</span><span>Tocá <b>«Convertirse en probador»</b>, después <b>«descárgala en Google Play»</b> e <b>Instalar</b>.</span></li>
+    <li class="paso" id="p1">
+      <div class="cab"><span class="num">1</span><h2>Unite al grupo de prueba</h2></div>
+      <p>En Google Groups tocá <b>«Unirse al grupo»</b>.</p>
+      <a class="boton" data-paso="1" target="_blank" rel="noopener"
+         href="https://accounts.google.com/ServiceLogin?hl=es-419&amp;passive=true&amp;continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fremate-tester">UNIRME AL GRUPO</a>
+      <p class="abierto">Abriste este paso. Si ya te uniste, seguí con el 2.</p>
+    </li>
+    <li class="paso" id="p2">
+      <div class="cab"><span class="num">2</span><h2>Aceptá la prueba</h2></div>
+      <p>En Google Play tocá <b>«Convertirse en probador»</b>. Si no aparece, esperá un minuto.</p>
+      <a class="boton" data-paso="2" target="_blank" rel="noopener"
+         href="https://play.google.com/apps/testing/ar.rematevive.app">ACEPTAR LA PRUEBA</a>
+      <p class="abierto">Abriste este paso. Si ya sos probador, seguí con el 3.</p>
+    </li>
+    <li class="paso" id="p3">
+      <div class="cab"><span class="num">3</span><h2>Instalá Rema Top</h2></div>
+      <p>En Play Store tocá <b>«Instalar»</b>. En la tienda figura como «remate vive».</p>
+      <a class="boton" data-paso="3" id="instalar" target="_blank" rel="noopener"
+         href="https://play.google.com/store/apps/details?id=ar.rematevive.app">INSTALAR REMA TOP</a>
+    </li>
   </ol>
-  <a class="boton" href="https://accounts.google.com/ServiceLogin?hl=es-419&amp;passive=true&amp;continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fremate-tester">COMENZAR</a>
-  <p class="nota">Usá la misma cuenta de Google de tu Play Store. En Google Play la app figura como «remate vive».</p>
+  <p class="nota">Dejá la app instalada y no salgas de la prueba por <b>14 días</b>. Es una versión de prueba: no hay pagos reales.</p>
 </main>
+<script>
+'use strict';
+// En Android, el paso 3 abre directamente la app Play Store (y la web de Google Play si no puede).
+if (/Android/i.test(navigator.userAgent)) {
+  document.getElementById('instalar').href =
+    'intent://details?id=ar.rematevive.app#Intent;scheme=market;package=com.android.vending;' +
+    'S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dar.rematevive.app;end';
+}
+// Resalta el paso siguiente según los botones que ya se tocaron (solo en este navegador; no afirma nada).
+(function () {
+  var K = 'rt-pasos-tocados', tocados = {};
+  try { tocados = JSON.parse(localStorage.getItem(K) || '{}'); } catch (e) {}
+  function pintar() {
+    var siguiente = 0;
+    for (var n = 1; n <= 3; n++) {
+      var li = document.getElementById('p' + n);
+      li.classList.toggle('tocado', !!tocados[n]);
+      li.classList.remove('siguiente');
+      if (!siguiente && !tocados[n]) siguiente = n;
+    }
+    document.getElementById('p' + (siguiente || 3)).classList.add('siguiente');
+  }
+  document.querySelectorAll('[data-paso]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      tocados[a.getAttribute('data-paso')] = true;
+      try { localStorage.setItem(K, JSON.stringify(tocados)); } catch (e) {}
+      setTimeout(pintar, 400);
+    });
+  });
+  pintar();
+})();
+</script>
 </body>
 </html>
