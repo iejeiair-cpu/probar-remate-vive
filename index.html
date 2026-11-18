@@ -63,14 +63,14 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
       <div class="cab"><span class="num">2</span><h2>Aceptá la prueba</h2></div>
       <p>En Google Play tocá <b>«Convertirse en probador»</b>. Si no aparece, esperá un minuto.</p>
       <a class="boton" data-paso="2" target="_blank" rel="noopener"
-         href="https://play.google.com/apps/testing/ar.rematevive.app">ACEPTAR LA PRUEBA</a>
+         href="https://play.google.com/apps/testing/ar.rematevive.app?hl=es_419">ACEPTAR LA PRUEBA</a>
       <p class="abierto">Abriste este paso. Si ya sos probador, seguí con el 3.</p>
     </li>
     <li class="paso" id="p3">
       <div class="cab"><span class="num">3</span><h2>Instalá Rema Top</h2></div>
       <p>En Play Store tocá <b>«Instalar»</b>. En la tienda figura como «remate vive».</p>
       <a class="boton" data-paso="3" id="instalar" target="_blank" rel="noopener"
-         href="https://play.google.com/store/apps/details?id=ar.rematevive.app">INSTALAR REMA TOP</a>
+         href="https://play.google.com/store/apps/details?id=ar.rematevive.app&amp;hl=es_419">INSTALAR REMA TOP</a>
     </li>
   </ol>
   <p class="nota">Dejá la app instalada y no salgas de la prueba por <b>14 días</b>. Es una versión de prueba: no hay pagos reales.</p>
@@ -81,7 +81,7 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
 if (/Android/i.test(navigator.userAgent)) {
   document.getElementById('instalar').href =
     'intent://details?id=ar.rematevive.app#Intent;scheme=market;package=com.android.vending;' +
-    'S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dar.rematevive.app;end';
+    'S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dar.rematevive.app%26hl%3Des_419;end';
 }
 // Resalta el paso siguiente según los botones que ya se tocaron (solo en este navegador; no afirma nada).
 (function () {
