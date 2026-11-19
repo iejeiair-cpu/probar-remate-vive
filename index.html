@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Probá Rema Top</title>
-<meta name="description" content="Probá Rema Top en Android en 3 pasos.">
+<title>Instalá Rematop</title>
+<meta name="description" content="Instalá Rematop en Android en 3 pasos.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#013d24">
 <link rel="icon" href="rematop-logo.png">
 <!--
-  Inscripción de verificadores de Rema Top (prueba cerrada «Alpha» de ar.rematevive.app, Grupo de Google remate-tester).
+  Inscripción de verificadores de Rematop (prueba cerrada «Alpha» de ar.rematevive.app, Grupo de Google remate-tester).
   Basada en la primera versión (commit 1c73ef3): una sola página con las 3 acciones a la vista y cada botón abre la
   acción oficial de Google en una pestaña nueva. Al terminar en Google, «Atrás» cierra esa pestaña y vuelve acá.
   Sin conversaciones fijadas, sin confirmaciones propias, sin casillas «ya lo hice», sin servicios ni formularios.
@@ -41,38 +41,54 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
 .siguiente .boton{background:var(--menta);color:var(--verde);border-color:var(--menta);box-shadow:0 10px 24px rgba(5,251,188,.28)}
 .boton:active{transform:scale(.98)}
 .nota{font-size:.88rem;color:var(--suave);line-height:1.45;margin:18px auto 0;max-width:26rem}
-.nota b{color:#fff}
+.cuenta{display:flex;gap:10px;align-items:flex-start;text-align:left;background:rgba(5,251,188,.10);border:1px solid var(--menta);border-radius:16px;padding:11px 13px;margin:0 0 13px}
+.cuenta .ico{flex:0 0 30px;height:30px;border-radius:50%;background:var(--menta);color:var(--verde);font-weight:900;display:flex;align-items:center;justify-content:center}
+.cuenta p{margin:0;font-size:.93rem;line-height:1.38;color:var(--texto)}
+.listo{font-size:.86rem;color:var(--menta);margin:-4px 0 9px}
+.ayuda{font-size:.85rem;color:var(--suave);margin:9px 0 0;line-height:1.38}
+.opcion{font-size:.76rem;font-weight:900;letter-spacing:.12em;color:var(--menta);margin:0 0 8px;text-transform:uppercase;text-align:left}
+.alternativa{margin:16px 0 0;padding:14px 4px 0;border-top:1px solid var(--borde);text-align:left}
+.alternativa h2{font-size:1rem;margin:0 0 6px;color:#fff}
+.alternativa p{margin:0 0 6px;color:var(--suave);font-size:.88rem;line-height:1.4}
+.alternativa b{color:#fff}
 </style>
 </head>
 <body>
 <main>
-  <img class="logo" src="rematop-logo.png" alt="Rema Top" width="88" height="88">
-  <h1>¡Probá Rema Top!</h1>
-  <p class="bajada">Usá <b>la misma cuenta de Google de tu Play Store</b>. Al terminar cada paso, tocá <b>Atrás</b> y seguí con el próximo.</p>
+  <img class="logo" src="rematop-logo.png" alt="Rematop" width="88" height="88">
+  <h1>Instalá Rematop</h1>
+  <div class="cuenta"><span class="ico">!</span>
+    <p>Antes de empezar, abrí <b>Play Store</b> y tocá tu foto: <b>usá esa misma cuenta</b> en los 3 pasos.</p></div>
+  <p class="opcion">Opción 1 · Inscripción directa</p>
   <ol>
-    <li class="paso siguiente" id="p1">
-      <div class="cab"><span class="num">1</span><h2>Unite al grupo de prueba</h2></div>
-      <p>En Google Groups tocá <b>«Unirse al grupo»</b>. Quedó hecho cuando ese botón ya no aparece.</p>
-      <a class="boton" data-paso="1" target="_blank" rel="noopener"
+    <li class="paso siguiente">
+      <div class="cab"><span class="num">1</span><h2>Unite al grupo</h2></div>
+      <p>Tocá <b>«Unirse al grupo»</b>.</p>
+      <p class="listo">Listo cuando ese botón desaparece.</p>
+      <a class="boton" target="_blank" rel="noopener"
          href="https://accounts.google.com/ServiceLogin?hl=es-419&amp;passive=true&amp;continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fremate-tester">UNIRME AL GRUPO</a>
     </li>
-    <li class="paso siguiente" id="p2">
+    <li class="paso siguiente">
       <div class="cab"><span class="num">2</span><h2>Aceptá la prueba</h2></div>
-      <p>En Google Play tocá <b>«Convertirse en probador»</b>. Quedó hecho cuando Google confirma que <b>ya sos verificador</b>.</p>
-      <a class="boton" data-paso="2" target="_blank" rel="noopener"
+      <p>Tocá <b>«Convertirse en verificador»</b>.</p>
+      <p class="listo">Listo cuando Google dice que ya sos verificador.</p>
+      <a class="boton" target="_blank" rel="noopener"
          href="https://play.google.com/apps/testing/ar.rematevive.app?hl=es_419">ACEPTAR LA PRUEBA</a>
     </li>
-    <li class="paso siguiente" id="p3">
-      <div class="cab"><span class="num">3</span><h2>Instalá Rema Top</h2></div>
-      <p>En Play Store tocá <b>«Instalar»</b>. En la tienda figura como «remate vive».</p>
-      <p>¿Dice <b>«No se encontró el elemento»</b>? En Play Store tocá tu foto (arriba a la derecha), elegí <b>la misma cuenta del paso 1</b> y volvé a tocar este botón.</p>
-      <a class="boton" data-paso="3" id="instalar" target="_blank" rel="noopener"
-         href="https://play.google.com/store/apps/details?id=ar.rematevive.app&amp;hl=es_419">INSTALAR REMA TOP</a>
+    <li class="paso siguiente">
+      <div class="cab"><span class="num">3</span><h2>Instalá Rematop</h2></div>
+      <p>Tocá <b>«Instalar»</b> en Google Play.</p>
+      <a class="boton" target="_blank" rel="noopener"
+         href="https://play.google.com/store/apps/details?id=ar.rematevive.app&amp;hl=es_419">INSTALAR REMATOP</a>
+      <p class="ayuda">¿Dice «No se encontró el elemento»? Revisá que Play Store tenga la misma cuenta y probá de nuevo en unos minutos.</p>
     </li>
   </ol>
-  <p class="nota">Dejá la app instalada y no salgas de la prueba por <b>14 días</b>. Es una versión de prueba: no hay pagos reales.</p>
+  <section class="alternativa" aria-labelledby="alt-titulo">
+    <p class="opcion">Opción 2 · Invitación personal</p>
+    <h2 id="alt-titulo">¿No pudiste unirte al grupo?</h2>
+    <p>Pasale a quien te compartió este enlace <b>el correo de tu Play Store</b>. Te suma al grupo y después hacés los pasos <b>2</b> y <b>3</b>.</p>
+  </section>
+  <p class="nota">Dejala instalada <b>14 días</b>. Es una versión de prueba, sin pagos reales.</p>
 </main>
-<!-- El paso 3 usa el enlace HTTPS oficial de Google Play («Unirse en Android» de Play Console), sin forzar la app
-     Play Store con intent:// ni JavaScript. -->
 </body>
 </html>
