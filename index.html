@@ -13,8 +13,8 @@
   Basada en la primera versión (commit 1c73ef3): una sola página con las 3 acciones a la vista y cada botón abre la
   acción oficial de Google en una pestaña nueva. Al terminar en Google, «Atrás» cierra esa pestaña y vuelve acá.
   Sin conversaciones fijadas, sin confirmaciones propias, sin casillas «ya lo hice», sin servicios ni formularios.
-  Lo único que se recuerda (solo en este navegador) es qué botones ya se tocaron, para resaltar el paso siguiente;
-  nunca se afirma que un paso salió bien, porque Google no se lo informa a esta página.
+  La página no recuerda qué botones se tocaron ni marca pasos como hechos: abrir Google Groups o la aceptación no
+  confirma haberse unido ni haber aceptado. Cada paso indica qué muestra Google cuando quedó hecho.
 -->
 <style>
 :root{--verde:#013d24;--verde2:#0b5a38;--menta:#05fbbc;--texto:#e6f6ee;--suave:#a9cfbf;--tarjeta:rgba(255,255,255,.06);--borde:rgba(5,251,188,.18)}
@@ -40,8 +40,6 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
   background:rgba(5,251,188,.14);color:var(--menta);border:1px solid var(--borde)}
 .siguiente .boton{background:var(--menta);color:var(--verde);border-color:var(--menta);box-shadow:0 10px 24px rgba(5,251,188,.28)}
 .boton:active{transform:scale(.98)}
-.abierto{display:none;margin:8px 0 0;font-size:.85rem;color:var(--suave);text-align:center}
-.paso.tocado .abierto{display:block}
 .nota{font-size:.88rem;color:var(--suave);line-height:1.45;margin:18px auto 0;max-width:26rem}
 .nota b{color:#fff}
 </style>
@@ -52,21 +50,19 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
   <h1>¡Probá Rema Top!</h1>
   <p class="bajada">Usá <b>la misma cuenta de Google de tu Play Store</b>. Al terminar cada paso, tocá <b>Atrás</b> y seguí con el próximo.</p>
   <ol>
-    <li class="paso" id="p1">
+    <li class="paso siguiente" id="p1">
       <div class="cab"><span class="num">1</span><h2>Unite al grupo de prueba</h2></div>
-      <p>En Google Groups tocá <b>«Unirse al grupo»</b>.</p>
+      <p>En Google Groups tocá <b>«Unirse al grupo»</b>. Quedó hecho cuando ese botón ya no aparece.</p>
       <a class="boton" data-paso="1" target="_blank" rel="noopener"
          href="https://accounts.google.com/ServiceLogin?hl=es-419&amp;passive=true&amp;continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fremate-tester">UNIRME AL GRUPO</a>
-      <p class="abierto">Abriste este paso. Si ya te uniste, seguí con el 2.</p>
     </li>
-    <li class="paso" id="p2">
+    <li class="paso siguiente" id="p2">
       <div class="cab"><span class="num">2</span><h2>Aceptá la prueba</h2></div>
-      <p>En Google Play tocá <b>«Convertirse en probador»</b>. Si no aparece, esperá un minuto.</p>
+      <p>En Google Play tocá <b>«Convertirse en probador»</b>. Quedó hecho cuando Google confirma que <b>ya sos verificador</b>.</p>
       <a class="boton" data-paso="2" target="_blank" rel="noopener"
          href="https://play.google.com/apps/testing/ar.rematevive.app?hl=es_419">ACEPTAR LA PRUEBA</a>
-      <p class="abierto">Abriste este paso. Si ya sos probador, seguí con el 3.</p>
     </li>
-    <li class="paso" id="p3">
+    <li class="paso siguiente" id="p3">
       <div class="cab"><span class="num">3</span><h2>Instalá Rema Top</h2></div>
       <p>En Play Store tocá <b>«Instalar»</b>. En la tienda figura como «remate vive».</p>
       <p>¿Dice <b>«No se encontró el elemento»</b>? En Play Store tocá tu foto (arriba a la derecha), elegí <b>la misma cuenta del paso 1</b> y volvé a tocar este botón.</p>
@@ -76,33 +72,7 @@ h2{font-size:1.12rem;margin:0;font-weight:800}
   </ol>
   <p class="nota">Dejá la app instalada y no salgas de la prueba por <b>14 días</b>. Es una versión de prueba: no hay pagos reales.</p>
 </main>
-<script>
-'use strict';
-// El paso 3 usa el enlace HTTPS oficial de Google Play («Unirse en Android» de Play Console), sin forzar la app
-// Play Store con intent://: así el teléfono decide cómo abrirlo y no se impone una cuenta distinta de la inscrita.
-// Resalta el paso siguiente según los botones que ya se tocaron (solo en este navegador; no afirma nada).
-(function () {
-  var K = 'rt-pasos-tocados', tocados = {};
-  try { tocados = JSON.parse(localStorage.getItem(K) || '{}'); } catch (e) {}
-  function pintar() {
-    var siguiente = 0;
-    for (var n = 1; n <= 3; n++) {
-      var li = document.getElementById('p' + n);
-      li.classList.toggle('tocado', !!tocados[n]);
-      li.classList.remove('siguiente');
-      if (!siguiente && !tocados[n]) siguiente = n;
-    }
-    document.getElementById('p' + (siguiente || 3)).classList.add('siguiente');
-  }
-  document.querySelectorAll('[data-paso]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      tocados[a.getAttribute('data-paso')] = true;
-      try { localStorage.setItem(K, JSON.stringify(tocados)); } catch (e) {}
-      setTimeout(pintar, 400);
-    });
-  });
-  pintar();
-})();
-</script>
+<!-- El paso 3 usa el enlace HTTPS oficial de Google Play («Unirse en Android» de Play Console), sin forzar la app
+     Play Store con intent:// ni JavaScript. -->
 </body>
 </html>
